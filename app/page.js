@@ -56,7 +56,14 @@ const Maincard = () => {
 
   return (
     <div
-      className="w-full min-h-screen bg-no-repeat bg-center bg-fixed overflow-hidden"
+      className="
+        w-full
+        min-h-screen
+        bg-no-repeat
+        bg-center
+        bg-fixed
+        overflow-hidden
+      "
       style={{
         backgroundImage: "url('/images/bg1.png')",
         backgroundSize: "100% 100%",
@@ -74,14 +81,23 @@ const Maincard = () => {
       {/* ================= OPEN BUTTON ================= */}
 
       {!isOpen && (
-        <div className="bg-black/50 flex items-center justify-center h-screen">
-
+        <div
+          className="
+            bg-black/50
+            flex
+            items-center
+            justify-center
+            h-screen
+          "
+        >
           <button
             onClick={openCard}
             className="
-              px-10 py-4
+              px-10
+              py-4
               rounded-full
-              border border-white/30
+              border
+              border-white/30
               bg-white/10
               backdrop-blur-xl
               text-white
@@ -97,14 +113,24 @@ const Maincard = () => {
           >
             OPEN
           </button>
-
         </div>
       )}
 
       {/* ================= PHOTO ================= */}
 
       {isOpen && (
-        <div className="relative flex items-center justify-center h-screen bg-black/30">
+        <div
+          className="
+            relative
+            flex
+            items-center
+            justify-center
+            h-screen
+            bg-black/30
+          "
+        >
+
+          {/* ================= PHOTO SLIDER ================= */}
 
           <AnimatePresence mode="wait">
 
@@ -151,21 +177,39 @@ const Maincard = () => {
             {showMessage && (
 
               <motion.div
+
+                /*
+                  Message screen ke bilkul
+                  bottom ke neeche se start hoga.
+                */
+
                 initial={{
-                  y: "110vh",
+                  y: "100%",
                 }}
 
                 animate={{
-                  y: "-130vh",
+                  y: "-100%",
                 }}
 
                 transition={{
-                  duration:25,
+                  duration: 45,
                   ease: "linear",
                 }}
 
                 onAnimationComplete={() => {
+
+                  // Message complete hone ke baad
+                  // hide hoga
+
                   setShowMessage(false);
+
+                  // Thoda gap ke baad
+                  // dobara bottom se start hoga
+
+                  setTimeout(() => {
+                    setShowMessage(true);
+                  }, 500);
+
                 }}
 
                 className="
@@ -181,7 +225,7 @@ const Maincard = () => {
                 "
               >
 
-                {/* ONLY TEXT — NO BACKGROUND */}
+                {/* ================= TITLE ================= */}
 
                 <h1
                   className="
@@ -194,6 +238,9 @@ const Maincard = () => {
                 >
                   🎂 Happy Birthday! 🎉
                 </h1>
+
+
+                {/* ================= FIRST MESSAGE ================= */}
 
                 <p
                   className="
@@ -212,6 +259,9 @@ const Maincard = () => {
                   moments. ❤️
                 </p>
 
+
+                {/* ================= WISH ================= */}
+
                 <p
                   className="
                     mt-10
@@ -224,6 +274,9 @@ const Maincard = () => {
                 >
                   May all your dreams come true! ✨
                 </p>
+
+
+                {/* ================= SMILE ================= */}
 
                 <p
                   className="
@@ -239,8 +292,11 @@ const Maincard = () => {
                   keep being amazing. 💖
                 </p>
 
+
+                {/* ================= BIRTHDAY ================= */}
+
                 <p
-                  className=" 
+                  className="
                     mt-16
                     text-3xl
                     md:text-5xl
@@ -250,8 +306,125 @@ const Maincard = () => {
                   "
                 >
                   ❤️ Happy Birthday ❤️
+                  <br />
                   ❤️ Dear Darshana ❤️
                 </p>
+
+
+                {/* ================= LETTER ================= */}
+
+                <p
+                  className="
+                    mt-10
+                    text-xl
+                    md:text-3xl
+                    leading-relaxed
+                    text-white
+                    font-medium
+                    drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Dear Darshana, ❤️
+
+                  <br />
+                  <br />
+
+                  Some people make ordinary moments
+                  special just by being there.
+                  You are one of those people in my life.
+                </p>
+
+
+                {/* ================= MEMORIES ================= */}
+
+                <p
+                  className="
+                    mt-8
+                    text-xl
+                    md:text-3xl
+                    leading-relaxed
+                    text-white
+                    font-medium
+                    drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Thank you for all the smiles,
+                  memories, silly jokes and beautiful
+                  moments. 🫶
+
+                  <br />
+                  <br />
+
+                  I wish you endless happiness,
+                  success, love and countless reasons
+                  to smile. ✨
+
+                  <br />
+                  <br />
+
+                  Never stop shining and always stay
+                  the amazing person you are. 💖
+                </p>
+
+
+                {/* ================= FINAL BIRTHDAY ================= */}
+
+                <p
+                  className="
+                    mt-16
+                    text-3xl
+                    md:text-5xl
+                    font-bold
+                    text-white
+                    drop-shadow-[0_4px_10px_rgba(0,0,0,1)]
+                  "
+                >
+                  Happy Birthday, Darshana! 🎂❤️
+                </p>
+
+
+                {/* ================= FINAL WISH ================= */}
+
+                <p
+                  className="
+                    mt-8
+                    text-xl
+                    md:text-3xl
+                    leading-relaxed
+                    text-white
+                    font-medium
+                    drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Stay happy.
+                  <br />
+                  Stay blessed.
+                  <br />
+                  Stay amazing. 🌸
+                </p>
+
+
+                {/* ================= SIGNATURE ================= */}
+
+                <p
+                  className="
+                    mt-16
+                    text-3xl
+                    md:text-5xl
+                    font-bold
+                    text-white
+                    drop-shadow-[0_4px_10px_rgba(0,0,0,1)]
+                  "
+                >
+                  With lots of best wishes,
+                  <br />
+                  Your Best Friend ❤️Nishan
+                </p>
+
+
+                {/* Extra space */}
+
+                <div className="h-[40vh]" />
 
               </motion.div>
 
