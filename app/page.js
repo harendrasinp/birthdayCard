@@ -7,10 +7,12 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 const Maincard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(0);
+  const [showMessage, setShowMessage] = useState(false);
 
   const audioRef = useRef(null);
 
   // ================= PHOTOS =================
+
   const photos = [
     "/images/bg4.png",
     "/images/bg5.jpeg",
@@ -19,6 +21,7 @@ const Maincard = () => {
   ];
 
   // ================= OPEN CARD =================
+
   const openCard = () => {
     setIsOpen(true);
 
@@ -26,9 +29,15 @@ const Maincard = () => {
       audioRef.current.volume = 0.5;
       audioRef.current.play();
     }
+
+    // 1 second baad message start hoga
+    setTimeout(() => {
+      setShowMessage(true);
+    }, 1000);
   };
 
   // ================= PHOTO SLIDER =================
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -40,19 +49,20 @@ const Maincard = () => {
 
         return prev + 1;
       });
-    }, 4000); // 4 second baad next photo
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, [isOpen, photos.length]);
+  }, [isOpen]);
 
   return (
     <div
-      className="w-full min-h-screen bg-no-repeat bg-center bg-fixed"
+      className="w-full min-h-screen bg-no-repeat bg-center bg-fixed overflow-hidden"
       style={{
         backgroundImage: "url('/images/bg1.png')",
         backgroundSize: "100% 100%",
       }}
     >
+
       {/* ================= AUDIO ================= */}
 
       <audio
@@ -91,10 +101,10 @@ const Maincard = () => {
         </div>
       )}
 
-      {/* ================= PHOTO SLIDESHOW ================= */}
+      {/* ================= PHOTO ================= */}
 
       {isOpen && (
-        <div className="bg-black/30 flex items-center justify-center h-screen">
+        <div className="relative flex items-center justify-center h-screen bg-black/30">
 
           <AnimatePresence mode="wait">
 
@@ -102,25 +112,30 @@ const Maincard = () => {
               key={currentPhoto}
               src={photos[currentPhoto]}
               alt="Birthday Girl"
+
               initial={{
                 opacity: 0,
                 scale: 0.95,
               }}
+
               animate={{
                 opacity: 1,
                 scale: 1,
               }}
+
               exit={{
                 opacity: 0,
                 scale: 1.05,
               }}
+
               transition={{
                 duration: 1.5,
                 ease: "easeInOut",
               }}
+
               className="
                 max-w-[85%]
-                max-h-[80vh]
+                max-h-[75vh]
                 object-contain
                 shadow-2xl
               "
@@ -128,8 +143,125 @@ const Maincard = () => {
 
           </AnimatePresence>
 
+
+          {/* ================= MOVIE STYLE MESSAGE ================= */}
+
+          <AnimatePresence>
+
+            {showMessage && (
+
+              <motion.div
+                initial={{
+                  y: "110vh",
+                }}
+
+                animate={{
+                  y: "-130vh",
+                }}
+
+                transition={{
+                  duration:25,
+                  ease: "linear",
+                }}
+
+                onAnimationComplete={() => {
+                  setShowMessage(false);
+                }}
+
+                className="
+                  fixed
+                  left-1/2
+                  -translate-x-1/2
+                  bottom-0
+                  w-[90%]
+                  max-w-3xl
+                  text-center
+                  z-40
+                  pointer-events-none
+                "
+              >
+
+                {/* ONLY TEXT — NO BACKGROUND */}
+
+                <h1
+                  className="
+                    text-4xl
+                    md:text-6xl
+                    font-bold
+                    text-white
+                    drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]
+                  "
+                >
+                  🎂 Happy Birthday! 🎉
+                </h1>
+
+                <p
+                  className="
+                    mt-8
+                    text-xl
+                    md:text-3xl
+                    leading-relaxed
+                    text-white
+                    font-medium
+                    drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Wishing you a beautiful birthday
+                  filled with happiness, love,
+                  laughter and countless beautiful
+                  moments. ❤️
+                </p>
+
+                <p
+                  className="
+                    mt-10
+                    text-2xl
+                    md:text-4xl
+                    font-bold
+                    text-white
+                    drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  May all your dreams come true! ✨
+                </p>
+
+                <p
+                  className="
+                    mt-10
+                    text-xl
+                    md:text-3xl
+                    font-semibold
+                    text-white
+                    drop-shadow-[0_3px_8px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Keep smiling, keep shining and
+                  keep being amazing. 💖
+                </p>
+
+                <p
+                  className=" 
+                    mt-16
+                    text-3xl
+                    md:text-5xl
+                    font-bold
+                    text-white
+                    drop-shadow-[0_4px_10px_rgba(0,0,0,1)]
+                  "
+                >
+                  ❤️ Happy Birthday ❤️
+                  ❤️ Dear Darshana ❤️
+                </p>
+
+              </motion.div>
+
+            )}
+
+          </AnimatePresence>
+
         </div>
       )}
+
 
       {/* ================= FLOWER SHOWER ================= */}
 
@@ -150,6 +282,7 @@ const Maincard = () => {
           }}
         />
       )}
+
     </div>
   );
 };
