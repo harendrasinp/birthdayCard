@@ -1,12 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Maincard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPhoto, setCurrentPhoto] = useState(0);
+
   const audioRef = useRef(null);
 
+  // ================= PHOTOS =================
+  const photos = [
+    "/images/bg4.png",
+    "/images/bg5.jpeg",
+    "/images/bg6.jpeg",
+    "/images/bg7.jpeg",
+  ];
+
+  // ================= OPEN CARD =================
   const openCard = () => {
     setIsOpen(true);
 
@@ -15,6 +27,23 @@ const Maincard = () => {
       audioRef.current.play();
     }
   };
+
+  // ================= PHOTO SLIDER =================
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const interval = setInterval(() => {
+      setCurrentPhoto((prev) => {
+        if (prev === photos.length - 1) {
+          return 0;
+        }
+
+        return prev + 1;
+      });
+    }, 4000); // 4 second baad next photo
+
+    return () => clearInterval(interval);
+  }, [isOpen, photos.length]);
 
   return (
     <div
@@ -25,6 +54,7 @@ const Maincard = () => {
       }}
     >
       {/* ================= AUDIO ================= */}
+
       <audio
         ref={audioRef}
         src="/music/bd.mp3"
@@ -32,8 +62,9 @@ const Maincard = () => {
       />
 
       {/* ================= OPEN BUTTON ================= */}
+
       {!isOpen && (
-        <div className="bg-black/50 flex flex-col items-center justify-center h-screen">
+        <div className="bg-black/50 flex items-center justify-center h-screen">
 
           <button
             onClick={openCard}
@@ -48,48 +79,60 @@ const Maincard = () => {
               font-semibold
               shadow-2xl
               hover:bg-white/20
-              hover:scale-105
+              hover:scale-110
               transition-all
               duration-300
               cursor-pointer
             "
           >
-            OPEN CARD
+            OPEN
           </button>
 
         </div>
       )}
 
-      {/* ================= CARD ================= */}
+      {/* ================= PHOTO SLIDESHOW ================= */}
+
       {isOpen && (
-        <div className="bg-black/50 flex flex-col items-center justify-center h-screen">
+        <div className="bg-black/30 flex items-center justify-center h-screen">
 
-          <div
-            className="
-              w-[90%]
-              max-w-4xl
-              rounded-3xl
-              border border-white/20
-              bg-white/10
-              p-10
-              backdrop-blur-xl
-              shadow-2xl
-            "
-          >
-            <h1 className="text-4xl font-bold text-white">
-              Your Content
-            </h1>
+          <AnimatePresence mode="wait">
 
-            <p className="mt-4 text-white/80">
-              This is your glassmorphism card.
-            </p>
+            <motion.img
+              key={currentPhoto}
+              src={photos[currentPhoto]}
+              alt="Birthday Girl"
+              initial={{
+                opacity: 0,
+                scale: 0.95,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 1.05,
+              }}
+              transition={{
+                duration: 1.5,
+                ease: "easeInOut",
+              }}
+              className="
+                max-w-[85%]
+                max-h-[80vh]
+                object-contain
+                shadow-2xl
+              "
+            />
 
-          </div>
+          </AnimatePresence>
 
         </div>
       )}
 
       {/* ================= FLOWER SHOWER ================= */}
+
       {isOpen && (
         <DotLottieReact
           src="https://lottie.host/577a639a-d5d6-4107-9f6b-8a601b772fe5/hEXNKn4fUY.lottie"
