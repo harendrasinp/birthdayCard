@@ -14,7 +14,9 @@ const Maincard = () => {
         height: "100%",
         backgroundSize: "100% 100%",
       }}
-    >
+    ><div className="bg-black/5 backdrop-blur-sm flex flex-col items-center justify-center h-screen">
+
+    </div>
       {/* ----------------------------flower shawer----------------------------- */}
         <DotLottieReact
           src="https://lottie.host/577a639a-d5d6-4107-9f6b-8a601b772fe5/hEXNKn4fUY.lottie"
