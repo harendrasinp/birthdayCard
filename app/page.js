@@ -418,7 +418,7 @@ const Maincard = () => {
                 >
                   With lots of best wishes,
                   <br />
-                  Your Best Friend ❤️Nishan
+                  Your Best Friend ❤️Nishant
                 </p>
 
 
